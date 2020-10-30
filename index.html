@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="sk">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Zadanie 3</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+
+        <nav class="navbar">
+            <a class="navbar-brand" href="#">
+              <img src="img/logo.png" width="120" height="50" class="d-inline-block align-top" alt="Html, Css, Javascript" class="rounded">
+            </a>
+            <span class="navbar-brand mb-0 h1">Webové Technológie</span>
+        </nav>
+        
+        <div class="container">
+
+            <h1 class="display-3 pt-2">Formulár k zadaniu 4</h1>
+
+            <form action="http://iolab.sk/form2mail/form2mail.php" method="post" enctype="multipart/form-data" id="form">
+
+                <!------------------------------------------------------------
+                    Povinna premenna, bez nej nebude preposielanie fungovat korektne
+                    apikey => API kluc  - povinne
+                ------------------------------------------------------------>
+                
+                <input type="hidden" name="apikey" value="9656e0968f010ae68fc0dde21ad366b4">
+
+                <!--    ----------------------------------------------------------
+                Nastavenia emailu:
+                from          => od koho
+                to            => komu - emailova adresa - povinne
+                sender        => komu - meno odosielatela - nepovinne
+                subject       => predmet  - povinne
+                redirectOk    => presmerovat po uspesnom odoslani - povinne
+                redirectFalse => presmerovat po neuspesnom odoslani  - povinne
+                ----------------------------------------------------------    -->
+
+                <input type="hidden" name="from" value="xsalyp@stuba.sk">
+                <input type="hidden" name="sender" value="Patrik Saly">
+                <input type="hidden" name="to" value="feistu04@gmail.com">
+                <input type="hidden" name="subject" value="Zadanie3">
+                <input type="hidden" name="redirectOk" value="http://147.175.121.202/~xsalyp/uloha/zadanie3/">
+                <input type="hidden" name="redirectFalse" value="http://147.175.121.202/~xsalyp/uloha/zadanie3/">
+
+                <!--    ----------------------------------------------------------
+                viditelne polia formulara na samotnej stranke
+                ----------------------------------------------------------    -->
+
+                <div class="row">
+                    <div class="form-group col-md-6">    
+                        <label for="krstneMeno">Meno: *</label>
+                        <input type="text" class="form-control" name="Meno" id="krstneMeno" placeholder="Krstné meno" onblur="validateNotEmpty(this.value, this.id)" required>
+                        <span class="closed">
+                            <p class="error">Pole meno nesmie byť prádzne.</p>
+                        </span>
+                    </div>
+
+                    <div class="form-group col-md-6">    
+                        <label for="priezvisko">Priezvisko: *</label>
+                        <input type="text" class="form-control" name="Priezvisko" id="priezvisko" placeholder="Priezvisko" onblur="validateNotEmpty(this.value, this.id)" required>
+                        <span class="closed">
+                            <p class="error">Pole priezvisko nesmie byť prádzne.</p>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-sm-7">    
+                        <label for="datumNarodenia">Dátum narodenia: *</label>
+                        <input type="date" class="form-control" name="Dátum narodenia" id="datumNarodenia" placeholder="Dátum narodenia" onblur="validateDate(this.value, this.id)" required>
+                        <span class="closed">
+                            <p class="error">Dátum nesmie byť z budúcnosti.</p>
+                        </span>
+                    </div>
+
+                    <div class="form-group col-sm-5">    
+                        <label for="vek">Vek:</label>
+                        <input type="number" class="form-control" name="Vek" id="vek" placeholder="Vek" onblur="validateAge(this.value, this.id, document.getElementById('datumNarodenia').value)">
+                        <span class="closed">
+                            <p class="error">Vek nekorešponduje s dátumom narodenia.</p> 
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="emailInput">Email: *</label>
+                    <input type="email" class="form-control" name="Email" id="emailInput" placeholder="martinko.klingac@gmail.com" onblur="validateEmail(this.value, this.id)" required>
+                    <span class="closed">
+                        <p class="error">Email musí byť vo formáte meno@domena1.domena2 .</p> 
+                    </span>
+                </div>
+
+                <h2 class="display-4">Šport</h2>
+                <p class="lead" id="skuska">Aký je tvoj obľúbený šport?</p>
+
+                <div class="form-group" name="Oblubený šport">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="futbal" value="futbal">
+                        <label class="form-check-label" for="futbal">Futbal</label>
+                    </div>   
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="hokej" value="hokej">
+                        <label class="form-check-label" for="hokej">Hokej</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="volejbal"  value="volejbal">
+                        <label class="form-check-label" for="volejbal">Volejbal</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="tenis" value="tenis">
+                        <label class="form-check-label" for="tenis">Tenis</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="other" onclick="showOther('other', 'otherInput')">
+                        <label class="form-check-label" for="iny">Iné</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control closed" name="Iný obľúbený šport" id="otherInput">
+                    </div>
+
+                </div>
+
+                <p class="lead">Sleduješ profesionálny futbal?</p>
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="futbalAno" name="Sleduješ profesionálny futbal" class="custom-control-input" value="true" onchange="showOther('futbalAno', 'futbalForm', 'why')">
+                    <label class="custom-control-label" for="futbalAno">Áno</label>
+                </div>
+                  <div class="custom-control custom-radio pb-3">
+                    <input type="radio" id="futbalNie" name="Sleduješ profesionálny futbal" class="custom-control-input" value="false" onchange="showOther('futbalNie', 'why', 'futbalForm')">
+                    <label class="custom-control-label" for="futbalNie">Nie</label>
+                </div>
+
+                <div id="futbalForm" class="closed row mx-auto">
+                    
+                    <!-- Štáty -->
+                    <p class="lead">Aká je tvoja obľúbená liga, klub a hráč?</p>
+                    <select class="custom-select col-md-3 krajina" id="krajiny" name="Obľúbená liga" onchange="nationSelect()">
+                        <option selected value="-">Vyber si ligu</option>
+                        <option value="ang">Anglická - Premier League</option>
+                        <option value="sp">Španielsko - La Liga</option>
+                        <option value="ita">Taliansko - Serie A</option>
+                    </select>
+
+                    <!-- Kluby -->
+                    <select class="custom-select col-md-3 klub" name="Obľúbený klub" id="ang">
+                        <option selected value="-">Vyber si klub</option>
+                        <option value="mufc">Manchester United</option>
+                        <option value="liv">Liverpool</option>
+                        <option value="tot">Tottenham</option>
+                    </select>
+
+                    <select class="custom-select col-md-3 closed klub" name="Obľúbený klub" id="sp">
+                        <option selected value="-">Vyber si klub</option>
+                        <option value="fcb">FC Barcelona</option>
+                        <option value="rma">Real Madrid</option>
+                        <option value="atm">Atlético Madrid</option>
+                    </select>
+
+                    <select class="custom-select col-md-3 closed klub" name="Obľúbený klub" id="ita">
+                        <option selected value="-">Vyber si klub</option>
+                        <option value="jt">Juventus Turín</option>
+                        <option value="acm">AC Miláno</option>
+                        <option value="im">Inter Miláno</option>
+                    </select>
+
+                    <!-- Hráči -->
+                    <select class="custom-select col-md-3 hraci" name="Obľúbeny hráč" id="mufc">
+                        <option selected value="-">Vyber si hráča</option>
+                        <option value="ddg">de Gea David</option>
+                        <option value="bf">Fernandes Bruno</option>
+                        <option value="atm">Rashford Marcus</option>
+                    </select>
+                    <select class="custom-select col-md-3 closed hraci" name="Obľúbeny hráč" id="liv">
+                        <option selected value="-">Vyber si hráča</option>
+                        <option value="vvd">van Dijk Virgil</option>
+                        <option value="jh">Henderson Jordan</option>
+                        <option value="ms">Salah Mohamed</option>
+                    </select>
+                    <select class="custom-select col-md-3 closed hraci" name="Obľúbeny hráč" id="tot">
+                        <option selected value="-">Vyber si hráča</option>
+                        <option value="hk">Kane Harry</option>
+                        <option value="son">Son Heung-Min</option>
+                        <option value="da">Alli Dele</option>
+                    </select>
+ 
+                    <select class="custom-select col-md-3 closed hraci" name="Obľúbeny hráč" id="fcb">
+                        <option selected value="-">Vyber si hráča</option>
+                        <option value="lm">Messi Lionel</option>
+                        <option value="gp">Pique Gerard</option>
+                        <option value="pc">Coutinho Philippe</option>
+                    </select>
+                    <select class="custom-select col-md-3 closed hraci" name="Obľúbeny hráč" id="rma">
+                        <option selected value="-">Vyber si hráča</option>
+                        <option value="sr">Ramos Sergio</option>
+                        <option value="kb">Benzema Karim</option>
+                        <option value="tk">Kroos Toni</option>
+                    </select>
+                    <select class="custom-select col-md-3 closed hraci" name="Obľúbeny hráč" id="atm">
+                        <option selected value="-">Vyber si hráča</option>
+                        <option value="jf">Joao Felix</option>
+                        <option value="ls">Suarez Luis</option>
+                        <option value="lt">Torreira Lucas</option>
+                    </select>
+
+                    <select class="custom-select col-md-3 closed hraci" name="Obľúbeny hráč" id="jt">
+                        <option selected value="-">Vyber si hráča</option>
+                        <option value="cr">Ronaldo Cristiano</option>
+                        <option value="pd">Dybala Paulo</option>
+                        <option value="gb">Buffon Gianluigi</option>
+                    </select>
+                    <select class="custom-select col-md-3 closed hraci" name="Obľúbeny hráč" id="acm">
+                        <option selected value="-">Vyber si hráča</option>
+                        <option value="zi">Ibrahimovic Zlatan</option>
+                        <option value="dm">Maldini Daniel</option>
+                        <option value="ks">Kjaer Simon</option>
+                    </select>
+                    <select class="custom-select col-md-3 closed hraci" name="Obľúbeny hráč" id="im">
+                        <option selected value="-">Vyber si hráča</option> 
+                        <option value="sm">Škriniar Milan</option>
+                        <option value="rl">Lukaku Romelu</option>
+                        <option value="che">Eriksen Christian</option>
+                    </select>
+
+                </div>
+
+                <div class="form-group closed" id="why">
+                    <label for="exampleFormControlTextarea1">Prečo?</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" name="Preco futbal nie" rows="3"></textarea>
+                </div>
+
+                <button class="btn btn-lg" type="button" onclick="submitForm()" value="odoslat">Potvrdiť formulár</button>
+
+            </form>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+        <script src="js/script.js"></script>
+    </body>
+</html>
